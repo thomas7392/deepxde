@@ -7,34 +7,34 @@ from . import backend as bkd
 from .backend import backend_name, tf, torch, paddle
 from .real import Real
 
-# Data parallel
-parallel_scaling = None
-# Data parallel via Horovod
-hvd = None
-comm = None
-world_size = 1
-rank = 0
-if "OMPI_COMM_WORLD_SIZE" in os.environ:
-    if backend_name == "tensorflow.compat.v1":
-        import horovod.tensorflow as hvd
+# # Data parallel
+# parallel_scaling = None
+# # Data parallel via Horovod
+# hvd = None
+# comm = None
+# world_size = 1
+# rank = 0
+# if "OMPI_COMM_WORLD_SIZE" in os.environ:
+#     if backend_name == "tensorflow.compat.v1":
+#         import horovod.tensorflow as hvd
 
-        hvd.init()
-        world_size = hvd.size()
-        if world_size > 1:
-            from mpi4py import MPI
+#         hvd.init()
+#         world_size = hvd.size()
+#         if world_size > 1:
+#             from mpi4py import MPI
 
-            parallel_scaling = "weak"
-            comm = MPI.COMM_WORLD
-            tf.compat.v1.disable_eager_execution()  # Without this line, Horovod broadcasting fails.
-            rank = hvd.rank()  # Only single node acceleration supported so far.
-            if rank == 0:
-                print(f"\nParallel training with {world_size} processes.\n")
-        else:
-            hvd = None
-    else:
-        raise NotImplementedError(
-            "Parallel training via Horovod is only implemented in backend tensorflow.compat.v1"
-        )
+#             parallel_scaling = "weak"
+#             comm = MPI.COMM_WORLD
+#             tf.compat.v1.disable_eager_execution()  # Without this line, Horovod broadcasting fails.
+#             rank = hvd.rank()  # Only single node acceleration supported so far.
+#             if rank == 0:
+#                 print(f"\nParallel training with {world_size} processes.\n")
+#         else:
+#             hvd = None
+#     else:
+#         raise NotImplementedError(
+#             "Parallel training via Horovod is only implemented in backend tensorflow.compat.v1"
+#         )
 
 
 # Default float type
