@@ -7,13 +7,14 @@ from . import backend as bkd
 from .backend import backend_name, tf, torch, paddle
 from .real import Real
 
-# # Data parallel
-# parallel_scaling = None
-# # Data parallel via Horovod
-# hvd = None
-# comm = None
-# world_size = 1
-# rank = 0
+# Data parallel
+parallel_scaling = None
+# Data parallel via Horovod
+hvd = None
+comm = None
+world_size = 1
+rank = 0
+
 # if "OMPI_COMM_WORLD_SIZE" in os.environ:
 #     if backend_name == "tensorflow.compat.v1":
 #         import horovod.tensorflow as hvd
@@ -35,8 +36,6 @@ from .real import Real
 #         raise NotImplementedError(
 #             "Parallel training via Horovod is only implemented in backend tensorflow.compat.v1"
 #         )
-
-hvd = None
 
 # Default float type
 real = Real(32)
