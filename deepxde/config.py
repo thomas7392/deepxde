@@ -36,6 +36,7 @@ from .real import Real
 #             "Parallel training via Horovod is only implemented in backend tensorflow.compat.v1"
 #         )
 
+hvd = None
 
 # Default float type
 real = Real(32)
