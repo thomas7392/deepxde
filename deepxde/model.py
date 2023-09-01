@@ -1120,7 +1120,7 @@ class TrainState:
         self.test_aux_vars = test_aux_vars
 
     def update_best(self):
-        if self.best_loss_train > np.sum(self.loss_train):
+        if self.best_loss_test > np.sum(self.loss_test):
             self.best_step = self.step
             self.best_loss_train = np.sum(self.loss_train)
             self.best_loss_test = np.sum(self.loss_test)
