@@ -58,8 +58,8 @@ class Interval(Geometry):
         grid = tf.linspace(tf.constant(self.l, precision),
                            tf.constant(self.r, precision),
                            n)
-        std = (grid[1] - grid[0])*0.2
-        noise = tf.random.normal([n], mean = 0, stddev = std, dtype = precision)
+
+        noise = tf.random.normal([n], mean = 0, stddev = self.sampler_std, dtype = precision)
         new_times = grid + noise
 
         # Make sure time is not outside [t0, tf]: set to t0 or tf if violated

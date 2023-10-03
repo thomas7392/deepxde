@@ -11,10 +11,11 @@ from ..utils import isclose
 
 
 class TimeDomain(Interval):
-    def __init__(self, t0, t1):
+    def __init__(self, t0, t1, sampler_std = None):
         super().__init__(t0, t1)
         self.t0 = t0
         self.t1 = t1
+        self.sampler_std = sampler_std
 
     def on_initial(self, t):
         return isclose(t, self.t0).flatten()
